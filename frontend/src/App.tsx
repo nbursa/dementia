@@ -5,6 +5,7 @@ import {FETCH_TODOS} from "./graphql/queries";
 import {
   CREATE_TODO
 } from "./graphql/mutations/createTodo.ts";
+import TodoForm from "./components/TodoForm.tsx";
 
 
 const App: React.FC = () => {
@@ -26,17 +27,9 @@ const App: React.FC = () => {
   if (error) return <p>Error: {error.message}</p>;
 
   return (
-    <div>
-      <h1>Todo App</h1>
-      <div>
-        <input
-          type="text"
-          placeholder="Enter a new todo..."
-          value={newTodoTitle}
-          onChange={(e) => setNewTodoTitle(e.target.value)}
-        />
-        <button onClick={handleCreateTodo}>Create Todo</button>
-      </div>
+    <div className="container mx-auto font-inter p-4">
+      <h2 className="text-3xl font-bold mb-4 text-base">Todo App</h2>
+      <TodoForm onSubmit={handleCreateTodo} />
       <TodoList todos={data.getToDos} />
     </div>
   );
