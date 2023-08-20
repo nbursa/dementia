@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import TodoButton from "./TodoButton.tsx";
-import TodoInput from "./TodoInput.tsx";
+import TodoButton from "./elements/TodoButton.tsx";
+import TodoInput from "./elements/TodoInput.tsx";
 
 interface TodoInputProps {
   onSubmit: (title: string) => void;
