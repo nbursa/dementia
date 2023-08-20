@@ -1,10 +1,5 @@
 import React from 'react';
-
-interface Todo {
-  id: string;
-  title: string;
-  completed: boolean;
-}
+import { Todo } from '../types/todoType';
 
 interface TodoItemProps {
   todo: Todo;

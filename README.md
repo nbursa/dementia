@@ -32,3 +32,14 @@ The project is organized into two main directories: `frontend` and `backend`.
 - `frontend`: Contains the React frontend code for the application.
 - `backend`: Contains the Node.js backend code, including API routes, controllers, models, and GraphQL setup.
 - `docker`: Includes Docker files for both frontend and backend containerization.
+
+## Getting Started
+
+To get started with the Todo App, follow these steps:
+
+1. Clone this repository:
+
+   ```bash
+   git clone https://github.com/your-username/todo-app.git
+   cd todo-app
+   ```

@@ -1,19 +1,16 @@
 import React from 'react';
 import TodoItem from './TodoItem';
+import { Todo } from '../types/todoType';
 
-interface Props {
-  todos: Array<{
-    id: string;
-    title: string;
-    completed: boolean;
-  }>;
+interface TodoListProps {
+  todos: Todo[];
 }
 
-const TodoList: React.FC<Props> = ({ todos }) => {
+const TodoList: React.FC<TodoListProps> = ({ todos }) => {
   return (
     <div>
-      {todos.map(todo => (
-        <TodoItem key={todo.id} todo={todo} />
+      {todos.map((todo) => (
+        <TodoItem key={todo._id} todo={todo} />
       ))}
     </div>
   );

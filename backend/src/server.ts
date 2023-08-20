@@ -4,8 +4,13 @@ import { connectToDb } from './utils/db';
 import {typeDefs} from "./graphql/typeDefs";
 import {resolvers} from "./graphql/resolvers";
 import {DatabaseError} from "./utils/resolvers-errors";
+import cors from 'cors';
 
 const app = express();
+
+app.use(cors({
+  origin: 'http://localhost:5173'  // frontend origin
+}));
 
 const startServer = async () => {
   const db = await connectToDb();

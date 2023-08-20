@@ -12,7 +12,7 @@ export const resolvers: IResolvers = {
     },
   },
   Mutation: {
-    async addTodo(parent, args, context, info) {
+    async createTodo(parent, args, context, info) {
       try {
         const result = await context.db.collection('todos').insertOne({
           title: args.title,
