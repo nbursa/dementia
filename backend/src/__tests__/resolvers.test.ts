@@ -21,7 +21,6 @@ describe('Resolvers', () => {
             // Check for GraphQL errors
           expect(response.errors).toBeUndefined();
           expect(response.data.getToDos).toBeDefined();
-            // add more assertions based on your needs...
         });
     });
 
@@ -46,9 +45,6 @@ describe('Resolvers', () => {
           expect(response.errors).toBeUndefined();
           expect(response.data.addTodo.title).toBe('Test todo');
           expect(response.data.addTodo.completed).toBe(false);
-            // add more assertions based on your needs...
         });
-
-        // Similarly, you can write tests for the removeTodo mutation...
     });
 });

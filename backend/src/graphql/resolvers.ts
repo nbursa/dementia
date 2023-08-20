@@ -2,7 +2,7 @@ import {IResolvers} from "@graphql-tools/utils";
 import {
   DatabaseError,
   UserInputError
-} from '../utils/errors';
+} from '../utils/resolvers-errors';
 import {ObjectId} from "mongodb";
 
 export const resolvers: IResolvers = {
