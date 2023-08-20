@@ -1,0 +1,20 @@
+# Use an official Node.js runtime as the base image
+FROM node:14
+
+# Set the working directory inside the container
+WORKDIR /app/frontend
+
+# Copy package.json and package-lock.json to the container
+COPY ./frontend/package*.json ./
+
+# Install dependencies
+RUN npm install
+
+# Copy the rest of the frontend source code to the container
+COPY ./frontend .
+
+# Expose the port that your frontend development server runs on
+EXPOSE 3000
+
+# Define the command to start your frontend development server
+CMD ["npm", "start"]
