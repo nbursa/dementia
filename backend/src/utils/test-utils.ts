@@ -5,8 +5,8 @@ import {
 } from 'apollo-server-express';
 import {MongoClient, MongoClientOptions} from 'mongodb';
 import { MongoMemoryServer } from 'mongodb-memory-server';
-import {typeDefs} from '../server';
-import {resolvers} from '../server';
+import {typeDefs} from '../graphql/typeDefs';
+import {resolvers} from '../graphql/resolvers';
 
 let mongoServer: MongoMemoryServer;
 let client: MongoClient;
@@ -15,7 +15,7 @@ beforeAll(async () => {
   mongoServer = await MongoMemoryServer.create();
   client = new MongoClient(mongoServer.getUri(), { useNewUrlParser: true, useUnifiedTopology: true } as MongoClientOptions);
   await client.connect();
-});
+}, 10000);
 
 afterAll(async () => {
   if (client) await client.close();

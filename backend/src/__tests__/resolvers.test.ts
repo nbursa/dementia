@@ -1,5 +1,5 @@
 import { gql } from 'apollo-server-express';
-import { serverTestClient } from './test-utils';
+import { serverTestClient } from '../utils/test-utils';
 
 const { query, mutate } = serverTestClient;
 
@@ -17,6 +17,9 @@ describe('Resolvers', () => {
             `;
 
           const response = await query({ query: GET_TODOS });
+
+            // Check for GraphQL errors
+          expect(response.errors).toBeUndefined();
           expect(response.data.getToDos).toBeDefined();
             // add more assertions based on your needs...
         });
@@ -38,6 +41,9 @@ describe('Resolvers', () => {
             mutation: ADD_TODO,
             variables: { title: 'Test todo' }
           });
+
+            // Check for GraphQL errors
+          expect(response.errors).toBeUndefined();
           expect(response.data.addTodo.title).toBe('Test todo');
           expect(response.data.addTodo.completed).toBe(false);
             // add more assertions based on your needs...

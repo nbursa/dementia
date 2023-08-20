@@ -7,7 +7,8 @@
     "dev": "nodemon --watch 'src/**/*' -e ts,tsx --exec 'ts-node' src/server.ts",
     "start": "node start/server.ts",
     "build": "tsc",
-    "test": "JEST_CONFIG_PROCESS=ts-node npm test",
+    "test": "jest",
+    "test:ts-node": "JEST_CONFIG_PROCESS=ts-node npm test",
     "test:watch": "JEST_CONFIG_PROCESS=ts-node npm test -- --watch"
   },
   "keywords": [],
