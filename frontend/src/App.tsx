@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
-import TodoList from './components/TodoList';
+import TodoList from './components/molecules/TodoList.tsx';
 import { useQuery, useMutation } from '@apollo/client';
 import {FETCH_TODOS} from "./graphql/queries";
 import {
   CREATE_TODO
 } from "./graphql/mutations/createTodo.ts";
-import TodoForm from "./components/TodoForm.tsx";
+import TodoForm from "./components/molecules/TodoForm.tsx";
 
 
 const App: React.FC = () => {
