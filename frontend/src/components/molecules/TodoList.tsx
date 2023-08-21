@@ -8,11 +8,11 @@ interface TodoListProps {
 
 const TodoList: React.FC<TodoListProps> = ({ todos }) => {
   return (
-    <div>
+    <>
       {todos.map((todo) => (
         <TodoItem key={todo._id} todo={todo} />
       ))}
-    </div>
+    </>
   );
 };
 

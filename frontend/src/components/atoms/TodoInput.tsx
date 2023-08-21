@@ -1,18 +1,23 @@
 import React from 'react';
 
 interface TodoInputProps {
-  onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
-  value: string;
+  onChange: (event: React.ChangeEvent<HTMLInputElement>) => void,
+  value: string,
+  className: string
 }
 
-const TodoInput: React.FC<TodoInputProps> = ({ value, onChange }) => {
+const TodoInput: React.FC<TodoInputProps> = ({
+                                               value,
+                                               onChange,
+                                               className
+                                             }) => {
   return (
     <input
-      className="flex-grow border rounded p-2 mr-2"
       type="text"
       placeholder="Enter a new todo..."
       value={value}
       onChange={onChange}
+      className={className}
     />
   );
 };

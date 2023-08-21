@@ -3,15 +3,17 @@ import React from 'react';
 interface TodoButtonProps {
   type: "submit" | "button" | "reset";
   label: string;
+  className: string;
 }
 
-const TodoButton: React.FC<TodoButtonProps> = ({ type, label }) => {
+const TodoButton: React.FC<TodoButtonProps> = ({ type, label, className }) => {
   return (
     <button
-      className="bg-blue-500 hover:bg-blue-600 text-white rounded px-4 py-2"
+      className={className}
       type={type}
     >
       {label}
+      <span className="ml-2"><img src="../../../public/plus.svg" alt="Plus svg" /></span>
     </button>
   );
 };

@@ -1,10 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-
-interface Todo {
-  id: number;
-  text: string;
-  completed: boolean;
-}
+import { Todo } from "../../types/todoType.ts";
 
 interface InitialState {
   todos: Todo[];
@@ -18,22 +13,24 @@ const todoSlice = createSlice({
   name: 'todos',
   initialState,
   reducers: {
-    addTodo: (state, action: PayloadAction<string>) => {
+    createTodo: (state, action: PayloadAction<string>) => {
       const newTodo: Todo = {
-        id: Date.now(), // This is just a basic way to get unique IDs. In a real-world application, you'd likely use something more robust.
-        text: action.payload,
+        _id: Date.now().toString(),
+        title: action.payload,
         completed: false,
+        createdAt: new Date(),
+        updatedAt: new Date(),
       };
       state.todos.push(newTodo);
     },
-    toggleTodo: (state, action: PayloadAction<number>) => {
-      const todo = state.todos.find((t) => t.id === action.payload);
+    toggleTodo: (state, action: PayloadAction<string>) => {
+      const todo = state.todos.find((t) => t._id === action.payload);
       if (todo) {
         todo.completed = !todo.completed;
       }
     },
-    deleteTodo: (state, action: PayloadAction<number>) => {
-      const index = state.todos.findIndex((t) => t.id === action.payload);
+    removeTodo: (state, action: PayloadAction<string>) => {
+      const index = state.todos.findIndex((t) => t._id === action.payload);
       if (index !== -1) {
         state.todos.splice(index, 1);
       }
@@ -41,5 +38,5 @@ const todoSlice = createSlice({
   },
 });
 
-export const { addTodo, toggleTodo, deleteTodo } = todoSlice.actions;
+export const { createTodo, toggleTodo, removeTodo } = todoSlice.actions;
 export default todoSlice.reducer;

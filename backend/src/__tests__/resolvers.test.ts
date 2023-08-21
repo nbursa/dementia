@@ -25,10 +25,10 @@ describe('Resolvers', () => {
     });
 
     describe('Mutations', () => {
-        test('should add a todo', async () => {
-            const ADD_TODO = gql`
-                mutation AddTodo($title: String!) {
-                    addTodo(title: $title) {
+        test('should create a todo', async () => {
+            const CREATE_TODO = gql`
+                mutation CreateTodo($title: String!) {
+                    createTodo(title: $title) {
                         _id
                         title
                         completed
@@ -37,14 +37,14 @@ describe('Resolvers', () => {
             `;
 
           const response = await mutate({
-            mutation: ADD_TODO,
+            mutation: CREATE_TODO,
             variables: { title: 'Test todo' }
           });
 
             // Check for GraphQL errors
           expect(response.errors).toBeUndefined();
-          expect(response.data.addTodo.title).toBe('Test todo');
-          expect(response.data.addTodo.completed).toBe(false);
+          expect(response.data.createTodo.title).toBe('Test todo');
+          expect(response.data.createTodo.completed).toBe(false);
         });
     });
 });

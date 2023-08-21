@@ -5,7 +5,7 @@ import {
 } from 'apollo-server-express';
 import {MongoClient, MongoClientOptions} from 'mongodb';
 import { MongoMemoryServer } from 'mongodb-memory-server';
-import {typeDefs} from '../graphql/typeDefs';
+import {typeDefs} from '../types/typeDefs';
 import {resolvers} from '../graphql/resolvers';
 
 let mongoServer: MongoMemoryServer;
