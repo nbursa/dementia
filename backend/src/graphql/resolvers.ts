@@ -4,11 +4,12 @@ import {
   UserInputError
 } from '../utils/resolvers-errors';
 import {ObjectId} from "mongodb";
+const COLLECTION_NAME = process.env.COLLECTION_NAME;
 
 export const resolvers: IResolvers = {
   Query: {
     getTodos: async (parent, args, { db }): Promise<Array<{_id: string, title: string, completed: boolean}>> => {
-      return db.collection('todos').find().toArray();
+      return db.collection(COLLECTION_NAME).find().toArray();
     },
   },
   Mutation: {

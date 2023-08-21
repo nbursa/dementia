@@ -10,15 +10,6 @@ const App: React.FC = () => {
   const [createTodo] = useMutation(CREATE_TODO);
   const [newTodoTitle, setNewTodoTitle] = useState('');
 
-  // const handleCreateTodo = async () => {
-  //   if (newTodoTitle.trim() !== '') {
-  //     await createTodo({
-  //       variables: { title: newTodoTitle },
-  //       refetchQueries: [{ query: FETCH_TODOS }],
-  //     });
-  //     setNewTodoTitle('');
-  //   }
-  // };
   const handleCreateTodo = async () => {
     console.log("handleCreateTodo triggered");
     if (newTodoTitle.trim() !== '') {
@@ -34,15 +25,14 @@ const App: React.FC = () => {
     }
   };
 
-
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Error: {error.message}</p>;
 
   return (
     <div className="bg-base-darker flex flex-col h-screen font-inter">
       <div className="relative bg-base-darkest h-[20vh] flex flex-col items-center justify-center px-6">
-        <h2 className="bg-gradient-linear bg-clip-text text-transparent text-4xl font-bold text-center">Dementia</h2>
-        <small className="text-gray-400 text-center text-xs italic">A simple todo app built with React, Tailwind, Redux, GraphQL and MongoDB</small>
+        <h1 className="bg-gradient-linear bg-clip-text text-transparent text-5xl font-bold text-center">Dementia</h1>
+        <p className="text-gray-400 text-center text-xs italic">A simple todo app built with React, Tailwind, Redux, GraphQL and MongoDB</p>
         <TodoForm onSubmit={handleCreateTodo} />
       </div>
       <div className="w-full md:max-w-2xl mx-auto p-6 flex flex-col overflow-hidden overflow-y-auto">

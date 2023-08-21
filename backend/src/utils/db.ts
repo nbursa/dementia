@@ -14,12 +14,14 @@ let _db: any;
 
 export const connectToDb = async () => {
   if (_db) {
+    console.log("Using existing database connection");
     return _db;
   }
 
+  console.log("Creating new database connection");
   const client = new MongoClient(MONGO_URI);
-
   await client.connect();
   _db = client.db(DATABASE_NAME);
+  console.log("Database connection created");
   return _db;
 };

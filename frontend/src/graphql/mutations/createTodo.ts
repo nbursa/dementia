@@ -6,8 +6,6 @@ export const CREATE_TODO = gql`
             _id
             title
             completed
-            createdAt
-            updatedAt
         }
     }
 `;
