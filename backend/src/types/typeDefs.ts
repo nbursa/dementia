@@ -5,8 +5,8 @@ export const typeDefs = gql`
         _id: String!
         title: String!
         completed: Boolean!
-        createdAt: String
-        updatedAt: String
+        createdAt: String!
+        updatedAt: String!
     }
 
     type Query {
@@ -14,8 +14,8 @@ export const typeDefs = gql`
     }
 
     type Mutation {
-        createTodo(title: String!): ToDo!
+        createTodo(title: String!, completed: Boolean!, createdAt: String!, updatedAt: String!): ToDo!
         removeTodo(_id: ID!): Boolean!
-        updateTodo(_id: ID!, completed: Boolean!): ToDo!
+        updateTodo(_id: ID!, title: String!, completed: Boolean!, createdAt: String, updatedAt: String): ToDo!
     }
 `;

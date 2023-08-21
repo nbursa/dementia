@@ -5,6 +5,11 @@ interface InitialState {
   todos: Todo[];
 }
 
+interface UpdateTodoPayload {
+  _id: string;
+  title: string;
+}
+
 const initialState: InitialState = {
   todos: [],
 };
@@ -37,8 +42,15 @@ const todoSlice = createSlice({
         state.todos.splice(index, 1);
       }
     },
+    updateTodo: (state, action: PayloadAction<UpdateTodoPayload>) => {
+      const todoToUpdate = state.todos.find((t) => t._id === action.payload._id);
+      if (todoToUpdate) {
+        todoToUpdate.title = action.payload.title;
+        todoToUpdate.updatedAt = new Date(); // You might want to update the timestamp as well
+      }
+    },
   },
 });
 
-export const { createTodo, toggleTodo, removeTodo } = todoSlice.actions;
+export const { createTodo, toggleTodo, removeTodo, updateTodo } = todoSlice.actions;
 export default todoSlice.reducer;

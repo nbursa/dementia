@@ -1,4 +1,4 @@
-export interface Todo {
+export interface ToDo {
   _id: string;
   title: string;
   completed: boolean;

@@ -1,19 +1,20 @@
 import React from 'react';
 import TodoItem from '../atoms/TodoItem.tsx';
-import { Todo } from '../../types/todoType.ts';
+import { ToDo } from '../../types/todoType.ts';
 import TodoNoResults from "../atoms/TodoNoResults.tsx";
 import TodoResultsHeader
   from "../atoms/TodoResultsHeader.tsx";
 
 interface TodoListProps {
-  todos: Todo[];
+  todos: ToDo[];
+  className?: string;
 }
 
-const TodoList: React.FC<TodoListProps> = ({ todos }) => {
+const TodoList: React.FC<TodoListProps> = ({ todos, className }) => {
   const totalDoneTodos = todos.filter(todo => todo.completed).length;
 
   return (
-    <>
+    <div className={className}>
       <TodoResultsHeader total={todos.length} done={totalDoneTodos} />
       {todos.map((todo) => (
         <TodoItem key={todo._id} todo={todo} />
@@ -21,7 +22,7 @@ const TodoList: React.FC<TodoListProps> = ({ todos }) => {
       {todos.length === 0 && (
         <TodoNoResults />
       )}
-    </>
+    </div>
   );
 };
 
