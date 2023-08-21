@@ -14,6 +14,7 @@ const todoSlice = createSlice({
   initialState,
   reducers: {
     createTodo: (state, action: PayloadAction<string>) => {
+      console.log('action', action)
       const newTodo: Todo = {
         _id: Date.now().toString(),
         title: action.payload,
@@ -22,6 +23,7 @@ const todoSlice = createSlice({
         updatedAt: new Date(),
       };
       state.todos.push(newTodo);
+      console.log('newTodo', state.todos)
     },
     toggleTodo: (state, action: PayloadAction<string>) => {
       const todo = state.todos.find((t) => t._id === action.payload);

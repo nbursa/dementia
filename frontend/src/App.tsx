@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import TodoList from './components/molecules/TodoList.tsx';
 import { useQuery, useMutation } from '@apollo/client';
 import { FETCH_TODOS } from "./graphql/queries";
@@ -7,18 +7,16 @@ import TodoForm from "./components/molecules/TodoForm.tsx";
 
 const App: React.FC = () => {
   const { loading, error, data } = useQuery(FETCH_TODOS);
-  const [createTodo] = useMutation(CREATE_TODO);
-  const [newTodoTitle, setNewTodoTitle] = useState('');
+  const [createTodo, { loading: mutationLoading, error: mutationError }] = useMutation(CREATE_TODO);
 
-  const handleCreateTodo = async () => {
-    console.log("handleCreateTodo triggered");
-    if (newTodoTitle.trim() !== '') {
+  const handleCreateTodo = async (title: string) => {
+    console.log("handleCreateTodo triggered with title:", title);
+    if (title.trim() !== '') {
       try {
         await createTodo({
-          variables: { title: newTodoTitle },
+          variables: { title },
           refetchQueries: [{ query: FETCH_TODOS }],
         });
-        setNewTodoTitle('');
       } catch (err) {
         console.error("Error creating todo:", err);
       }
@@ -27,6 +25,8 @@ const App: React.FC = () => {
 
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Error: {error.message}</p>;
+  if (mutationLoading) return <p>Creating todo...</p>;
+  if (mutationError) return <p>Error creating todo: {mutationError.message}</p>;
 
   return (
     <div className="bg-base-darker flex flex-col h-screen font-inter">

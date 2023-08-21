@@ -10,9 +10,11 @@ interface TodoListProps {
 }
 
 const TodoList: React.FC<TodoListProps> = ({ todos }) => {
+  const totalDoneTodos = todos.filter(todo => todo.completed).length;
+
   return (
     <>
-      <TodoResultsHeader />
+      <TodoResultsHeader total={todos.length} done={totalDoneTodos} />
       {todos.map((todo) => (
         <TodoItem key={todo._id} todo={todo} />
       ))}
