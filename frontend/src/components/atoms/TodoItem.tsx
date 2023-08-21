@@ -34,76 +34,57 @@ const TodoItem: React.FC<TodoItemProps> = ({ todo }) => {
     setEditedTitle(e.target.value);
   };
 
-  // const handleTitleSubmit = async () => {
-  //   console.log("Changing title to:", editedTitle);
-  //   if (editedTitle.trim() !== '') {
-  //     await updateTodo({
-  //       variables: {
-  //         _id: todo._id,
-  //         title: editedTitle,
-  //         completed: todo.completed,
-  //         updatedAt: new Date(),
-  //         createdAt: todo.createdAt,
-  //       },
-  //       refetchQueries: [{ query: FETCH_TODOS }],
-  //     });
-  //     setIsEditing(false);
-  //     console.log("Title changed!", editedTitle);
-  //   }
-  // };
-    const handleTitleSubmit = async () => {
-      console.log("Changing title to:", editedTitle);
-        if (editedTitle.trim() !== '') {
-            try {
-                await updateTodo({
-                  variables: {
+  const handleTitleSubmit = async () => {
+      if (editedTitle.trim() !== '') {
+          try {
+              await updateTodo({
+                variables: {
+                  _id: todo._id,
+                  title: editedTitle,
+                  completed: todo.completed,
+                  updatedAt: new Date(),
+                  createdAt: todo.createdAt,
+                },
+                optimisticResponse: {
+                  __typename: "Mutation",
+                  updateTodo: {
+                    __typename: "Todo",
                     _id: todo._id,
                     title: editedTitle,
                     completed: todo.completed,
                     updatedAt: new Date(),
                     createdAt: todo.createdAt,
                   },
-                  optimisticResponse: {
-                    __typename: "Mutation",
-                    updateTodo: {
-                      __typename: "Todo",
-                      _id: todo._id,
-                      title: editedTitle,
-                      completed: todo.completed,
-                      updatedAt: new Date(),
-                      createdAt: todo.createdAt,
-                    },
+                },
+                  update: (cache, { data }) => {
+                    const updatedTodo = data?.updateTodo;
+                      if (updatedTodo) {
+                          cache.writeFragment({
+                            id: cache.identify({
+                              __typename: 'ToDo',
+                              _id: todo._id,
+                            }),
+                              fragment: gql`
+                                  fragment UpdatedTodo on ToDo {
+                                      title
+                                      updatedAt
+                                  }
+                              `,
+                            data: {
+                              title: updatedTodo.title,
+                              updatedAt: updatedTodo.updatedAt,
+                            },
+                          });
+                      }
                   },
-                    update: (cache, { data }) => {
-                      const updatedTodo = data?.updateTodo;
-                        if (updatedTodo) {
-                            cache.writeFragment({
-                              id: cache.identify({
-                                __typename: 'ToDo',
-                                _id: todo._id,
-                              }),
-                                fragment: gql`
-                                    fragment UpdatedTodo on ToDo {
-                                        title
-                                        updatedAt
-                                    }
-                                `,
-                              data: {
-                                title: updatedTodo.title,
-                                updatedAt: updatedTodo.updatedAt,
-                              },
-                            });
-                        }
-                    },
-                });
-              setIsEditing(false);
-              console.log("Title changed!", editedTitle);
-            } catch (error) {
-              console.error("Failed to update todo:", error);
-              // Show a user-friendly error message here.
-            }
-        }
-    };
+              });
+            setIsEditing(false);
+            console.log("Title changed!", editedTitle);
+          } catch (error) {
+            console.error("Failed to update todo:", error);
+          }
+      }
+  };
 
   const handleToggle = (id: string, completed: boolean) => {
     updateTodo({

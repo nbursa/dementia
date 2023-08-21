@@ -1,8 +1,8 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { Todo } from "../../types/todoType.ts";
+import { ToDo } from "../../types/todoType.ts";
 
 interface InitialState {
-  todos: Todo[];
+  todos: ToDo[];
 }
 
 interface UpdateTodoPayload {
@@ -20,7 +20,7 @@ const todoSlice = createSlice({
   reducers: {
     createTodo: (state, action: PayloadAction<string>) => {
       console.log('action', action)
-      const newTodo: Todo = {
+      const newTodo: ToDo = {
         _id: Date.now().toString(),
         title: action.payload,
         completed: false,

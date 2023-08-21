@@ -4,7 +4,6 @@ dotenv.config();
 
 const MONGO_URI = process.env.MONGO_URI;
 const DATABASE_NAME = process.env.DATABASE_NAME;
-const COLLECTION_NAME = process.env.COLLECTION_NAME;
 
 if (!MONGO_URI) {
   throw new Error('MONGO_URI environment variable is not defined.');

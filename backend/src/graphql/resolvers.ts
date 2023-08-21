@@ -17,9 +17,6 @@ const COLLECTION_NAME = process.env.COLLECTION_NAME;
 
 export const resolvers: IResolvers = {
   Query: {
-    // getTodos: async (parent, args, { db }): Promise<Array<{_id: string, title: string, completed: boolean}>> => {
-    //   return db.collection(COLLECTION_NAME).find().toArray();
-    // },
     getTodos: async (parent, args, { db }): Promise<Array<{_id: string, title: string, completed: boolean, createdAt: string}>> => {
       const todos = await db.collection(COLLECTION_NAME).find().toArray();
       return todos.map((todo: ToDo) => ({

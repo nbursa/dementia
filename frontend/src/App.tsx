@@ -19,24 +19,6 @@ const App: React.FC = () => {
   const { loading, error, data } = useQuery(FETCH_TODOS);
   const [createTodo, { loading: mutationLoading, error: mutationError }] = useMutation(CREATE_TODO);
 
-  // const handleCreateTodo = async (title: string) => {
-  //   console.log("handleCreateTodo triggered with title:", title);
-  //   if (title.trim() !== '') {
-  //     try {
-  //       await createTodo({
-  //         variables: {
-  //           title: title,
-  //           completed: false,
-  //           createdAt: new Date().toISOString(),
-  //           updatedAt: new Date().toISOString()
-  //         },
-  //         refetchQueries: [{ query: FETCH_TODOS }],
-  //       });
-  //     } catch (err) {
-  //       console.error("Error creating todo:", err);
-  //     }
-  //   }
-  // };
   const handleCreateTodo = async (title: string) => {
     console.log("handleCreateTodo triggered with title:", title);
     if (title.trim() !== '') {
@@ -52,7 +34,7 @@ const App: React.FC = () => {
             __typename: "Mutation",
             createTodo: {
               __typename: "Todo",
-              _id: "temp-id", // You can use any temporary id here. Server will replace this.
+              _id: "temp-id", // Server will replace this
               title: title,
               completed: false,
               createdAt: new Date().toISOString(),
