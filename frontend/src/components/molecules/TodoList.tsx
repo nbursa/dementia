@@ -12,11 +12,12 @@ interface TodoListProps {
 
 const TodoList: React.FC<TodoListProps> = ({ todos, className }) => {
   const totalDoneTodos = todos.filter(todo => todo.completed).length;
+  const reversedTodos = [...todos].reverse();
 
   return (
     <div className={className}>
       <TodoResultsHeader total={todos.length} done={totalDoneTodos} />
-      {todos.map((todo) => (
+      {reversedTodos.map((todo) => (
         <TodoItem key={todo._id} todo={todo} />
       ))}
       {todos.length === 0 && (

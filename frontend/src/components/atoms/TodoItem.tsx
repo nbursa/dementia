@@ -5,7 +5,6 @@ import { UPDATE_TODO } from "../../graphql/mutations/updateTodo.ts";
 import { REMOVE_TODO } from "../../graphql/mutations/removeTodo.ts";
 import {FETCH_TODOS} from "../../graphql/queries";
 import TodoInput from "./TodoInput.tsx";
-// import {Todo} from "../../types/todoType.ts";
 
 interface TodoItemProps {
   todo: ToDo;
@@ -110,6 +109,8 @@ const TodoItem: React.FC<TodoItemProps> = ({ todo }) => {
     updateTodo({
       variables: {
         _id: id,
+        title: todo.title,
+        createdAt: todo.createdAt,
         updatedAt: new Date(),
         completed: !completed,
       },

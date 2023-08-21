@@ -5,10 +5,38 @@ import { FETCH_TODOS } from "./graphql/queries";
 import { CREATE_TODO } from "./graphql/mutations/createTodo.ts";
 import TodoForm from "./components/molecules/TodoForm.tsx";
 
+interface TodosData {
+  getTodos: Array<{
+    _id: string;
+    title: string;
+    completed: boolean;
+    createdAt: string;
+    updatedAt: string;
+  }>;
+}
+
 const App: React.FC = () => {
   const { loading, error, data } = useQuery(FETCH_TODOS);
   const [createTodo, { loading: mutationLoading, error: mutationError }] = useMutation(CREATE_TODO);
 
+  // const handleCreateTodo = async (title: string) => {
+  //   console.log("handleCreateTodo triggered with title:", title);
+  //   if (title.trim() !== '') {
+  //     try {
+  //       await createTodo({
+  //         variables: {
+  //           title: title,
+  //           completed: false,
+  //           createdAt: new Date().toISOString(),
+  //           updatedAt: new Date().toISOString()
+  //         },
+  //         refetchQueries: [{ query: FETCH_TODOS }],
+  //       });
+  //     } catch (err) {
+  //       console.error("Error creating todo:", err);
+  //     }
+  //   }
+  // };
   const handleCreateTodo = async (title: string) => {
     console.log("handleCreateTodo triggered with title:", title);
     if (title.trim() !== '') {
@@ -20,7 +48,31 @@ const App: React.FC = () => {
             createdAt: new Date().toISOString(),
             updatedAt: new Date().toISOString()
           },
-          refetchQueries: [{ query: FETCH_TODOS }],
+          optimisticResponse: {
+            __typename: "Mutation",
+            createTodo: {
+              __typename: "Todo",
+              _id: "temp-id", // You can use any temporary id here. Server will replace this.
+              title: title,
+              completed: false,
+              createdAt: new Date().toISOString(),
+              updatedAt: new Date().toISOString(),
+            }
+          },
+          update: (cache, { data }) => {
+            const newTodo = data?.createTodo;
+            if (newTodo) {
+              const existingTodos = cache.readQuery<TodosData>({ query: FETCH_TODOS });
+              if (existingTodos) {
+                cache.writeQuery({
+                  query: FETCH_TODOS,
+                  data: {
+                    getTodos: [...existingTodos.getTodos, newTodo]
+                  }
+                });
+              }
+            }
+          },
         });
       } catch (err) {
         console.error("Error creating todo:", err);
