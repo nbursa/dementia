@@ -12,6 +12,7 @@ lerna-debug.log*
 /backend/node_modules
 
 # Build and Output
+/backend/dist
 /frontend/dist
 /frontend/dist-ssr
 /frontend/.vite/

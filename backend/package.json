@@ -11,7 +11,8 @@
     "test:ts-node": "JEST_CONFIG_PROCESS=ts-node npm test",
     "test:watch": "JEST_CONFIG_PROCESS=ts-node npm test -- --watch",
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
-    "prod:setup": "npm run build && npm start"
+    "prod:setup": "npm run build && npm start",
+    "postinstall": "tsc"
   },
   "keywords": [],
   "author": "nbursa",
