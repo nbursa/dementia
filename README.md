@@ -1,4 +1,5 @@
-# Todoapp
+
+# Todo App
 
 This monorepo contains both the frontend and backend components of a todo list application built using React, Redux, TypeScript, GraphQL, and MongoDB. The application allows users to manage their tasks through a user-friendly interface.
 
@@ -6,16 +7,9 @@ This monorepo contains both the frontend and backend components of a todo list a
 
 - [Features](#features)
 - [Project Structure](#project-structure)
-
-[//]: # (- [Getting Started]&#40;#getting-started&#41;)
-
-[//]: # (- [Usage]&#40;#usage&#41;)
-
-[//]: # (- [Technologies Used]&#40;#technologies-used&#41;)
-
-[//]: # (- [Contributing]&#40;#contributing&#41;)
-
-[//]: # (- [License]&#40;#license&#41;)
+- [Getting Started](#getting-started)
+- [Usage](#usage)
+- [Technologies Used](#technologies-used)
 
 ## Features
 
@@ -43,3 +37,77 @@ To get started with the Todo App, follow these steps:
    git clone https://github.com/your-username/todo-app.git
    cd todo-app
    ```
+
+2. Set up the environment variables:
+
+   - Create a `.env` file in both `frontend` and `backend` directories based on the `.env.example` files.
+
+   **Backend `.env`**:
+   ```env
+   MONGO_URI=mongodb+srv://<username>:<password>@<cluster-address>/<database>?retryWrites=true&w=majority
+   JWT_SECRET=<your_jwt_secret>
+   ```
+
+   **Frontend `.env`**:
+   ```env
+   VITE_API_URL=http://localhost:3000
+   ```
+
+3. Install dependencies for both frontend and backend:
+
+   **Backend**:
+   ```bash
+   cd backend
+   npm install
+   ```
+
+   **Frontend**:
+   ```bash
+   cd frontend
+   npm install
+   ```
+
+4. Start the development servers:
+
+   **Backend**:
+   ```bash
+   cd backend
+   npm run dev
+   ```
+
+   **Frontend**:
+   ```bash
+   cd frontend
+   npm run dev
+   ```
+
+5. Open your browser and navigate to `http://localhost:5173` to view the frontend application.
+
+## Usage
+
+- **Development**: Use `npm run dev` in both `frontend` and `backend` directories to start development servers.
+- **Production**: Use `npm run build` followed by `npm start` for both frontend and backend to build and run the production version of the app.
+
+## Technologies Used
+
+- **Frontend**:
+   - React
+   - Redux
+   - TypeScript
+   - Tailwind CSS
+   - Vite
+
+- **Backend**:
+   - Node.js
+   - Express
+   - GraphQL
+   - Apollo Server
+   - MongoDB
+   - TypeScript
+   - Jest
+
+- **Tooling**:
+   - Docker
+   - ESLint
+   - Prettier
+
