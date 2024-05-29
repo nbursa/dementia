@@ -30,4 +30,4 @@ lerna-debug.log*
 *.sw?
 
 # Environment Variables
-.env*
+.env
