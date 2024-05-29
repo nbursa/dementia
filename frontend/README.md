@@ -3,6 +3,8 @@
 
 A simple todo application built using React, Redux, Apollo Client, and Tailwind CSS.
 
+![Todo App screenshot](../frontend/public/todoapp.png)
+
 ## Table of Contents
 
 - [Overview](#overview)
