@@ -1,7 +1,7 @@
 
 # Todo App
 
-This monorepo contains both the frontend and backend components of a todo list application built using React, Redux, TypeScript, GraphQL, and MongoDB. The application allows users to manage their tasks through a user-friendly interface.
+This monorepo contains both the frontend and backend components of a todo list application built using React, Redux, TypeScript, GraphQL, Express and MongoDB. The application allows users to manage their tasks through a user-friendly interface.
 
 ![Todo App screenshot](./frontend/public/todoapp.png)
 
